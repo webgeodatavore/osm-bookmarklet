@@ -1,0 +1,23 @@
+{
+  "name": "osm-bookmarklets",
+  "version": "1.0.0",
+  "description": "Bookmarklet for switching to other mapping projcets using coordinates center and zoom",
+  "main": "osm_bookmarklet.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "all": "npm run buildloader && npm run buildremote && cp src/css/main.css build && cp src/img/osm-bookmarklet.png build",
+    "buildloader": "./node_modules/.bin/uglifyjs src/loader.js > build/loader.build.js && echo \"javascript:`cat build/loader.build.js`\" > build/loader.min.js",
+    "buildremote": "./node_modules/.bin/browserify src/osm-bookmarklet.js > build/osm-bookmarklet.build.js"
+  },
+  "author": "Thomas Gratier",
+  "license": "MIT",
+  "dependencies": {
+    "jed": "^1.1.0",
+    "sphericalmercator": "^1.0.3"
+  },
+  "devDependencies": {
+    "browserify": "^9.0.3",
+    "tape": "^3.5.0",
+    "uglify-js": "^2.4.17"
+  }
+}
