@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "all": "npm run buildloader && npm run buildremote && cp src/css/main.css build && cp src/img/osm-bookmarklet.png build",
     "buildloader": "./node_modules/.bin/uglifyjs src/loader.js > build/loader.build.js && echo \"javascript:`cat build/loader.build.js`\" > build/loader.min.js",
-    "buildremote": "./node_modules/.bin/browserify src/osm-bookmarklet.js > build/osm-bookmarklet.build.js"
+    "buildremote": "./node_modules/.bin/browserify src/osm-bookmarklet.js > build/osm-bookmarklet.build.js",
+    "deploy": "gh-pages-deploy"
   },
   "author": "Thomas Gratier",
   "license": "MIT",
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "browserify": "^9.0.3",
+    "gh-pages-deploy": "^0.3.0",
     "tape": "^3.5.0",
     "uglify-js": "^2.4.17"
   }
