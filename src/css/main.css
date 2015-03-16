@@ -65,7 +65,7 @@ div #link, div #edit, div #check, {
 }
 
 #osmbutton {
-  width: 40px;
+  width: 34px;
   height: 40px;
   float: left;
   z-index: 10000;
