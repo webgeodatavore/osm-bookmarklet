@@ -10,10 +10,12 @@
       'css_url_http': '//labs.webgeodatavore.com/osm-bookmarklet/main.css',
       'script_url_https': '//webgeodatavore.github.io/osm-bookmarklet/osm-bookmarklet.build.js',
       'css_url_https': '//webgeodatavore.github.io/osm-bookmarklet/main.css'
-    }, 
+    },
     'production': {
-      'script_url': '//webgeodatavore.github.io/osm-bookmarklet/osm-bookmarklet.js',
-      'css_url': '//webgeodatavore.github.io/osm-bookmarklet/main.css'
+      'script_url_http': '//labs.webgeodatavore.com/osm-bookmarklet/osm-bookmarklet.build.js',
+      'css_url_http': '//labs.webgeodatavore.com/osm-bookmarklet/main.css',
+      'script_url_https': '//webgeodatavore.github.io/osm-bookmarklet/osm-bookmarklet.build.js',
+      'css_url_https': '//webgeodatavore.github.io/osm-bookmarklet/main.css'
     }
   };
 
@@ -26,12 +28,20 @@
       lang = (navigator.language || navigator.userLanguage);
   }
 
+  var url_css = config.css_url_http;
+  var url_script = config.script_url_http;
+
+  if (window.location.protocol === 'https:') {
+    url_css = config.css_url_https;
+    url_script = config.script_url_https;
+  }
+
   var cssCode = document.createElement('link');
   cssCode.setAttribute('rel', 'stylesheet');
-  cssCode.setAttribute('href', config.css_url);
+  cssCode.setAttribute('href', url_css);
   document.body.appendChild(cssCode);
 
   var jsCode = document.createElement('script');
-  jsCode.setAttribute('src', config.script_url);
+  jsCode.setAttribute('src', window.location.protocol + url_script);
   document.body.appendChild(jsCode);
 })();
