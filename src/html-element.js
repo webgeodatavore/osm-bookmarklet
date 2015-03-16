@@ -5,7 +5,7 @@ lnk = require('./links.js');
 
 function createleftSideBar(url) {
   var block = '<div id="osmbookmarklet">';
-  block += '<div id="osmshortcuts">';
+  block += '<div id="osmshortcuts" style="display:none;">';
   block += [
     {id: 'edit', title: 'Openstreetmap editing'},
     {id: 'check', title: 'Openstreetmap control'},
