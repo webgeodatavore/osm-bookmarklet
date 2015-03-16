@@ -36,12 +36,20 @@
     url_script = config.script_url_https;
   }
 
-  var cssCode = document.createElement('link');
-  cssCode.setAttribute('rel', 'stylesheet');
-  cssCode.setAttribute('href', url_css);
-  document.body.appendChild(cssCode);
+  var scripts = Array.prototype.slice.call(document.scripts);
+  var countSameUrl = scripts.filter(function(el) {
+    if (el.src === (window.location.protocol + url_script)) {
+     return true;
+    }
+  });
+  if (countSameUrl.length === 0) {
+    var cssCode = document.createElement('link');
+    cssCode.setAttribute('rel', 'stylesheet');
+    cssCode.setAttribute('href', url_css);
+    document.body.appendChild(cssCode);
 
-  var jsCode = document.createElement('script');
-  jsCode.setAttribute('src', window.location.protocol + url_script);
-  document.body.appendChild(jsCode);
+    var jsCode = document.createElement('script');
+    jsCode.setAttribute('src', window.location.protocol + url_script);
+    document.body.appendChild(jsCode);
+  }
 })();
