@@ -10,6 +10,13 @@
     "buildremote": "./node_modules/.bin/browserify src/osm-bookmarklet.js > build/osm-bookmarklet.build.js",
     "deploy": "gh-pages-deploy"
   },
+  "gh-pages-deploy": {
+    "staticpath": "build",
+    "prep": [
+      "all"
+    ],
+    "noprompt": false
+  },
   "author": "Thomas Gratier",
   "license": "MIT",
   "dependencies": {
