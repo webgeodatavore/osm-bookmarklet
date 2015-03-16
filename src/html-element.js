@@ -1,49 +1,30 @@
-exports.createContentShortcuts = createContentShortcuts;
-exports.createToogleButton = createToogleButton;
+exports.createleftSideBar = createleftSideBar;
 exports.readLinks = readLinks;
 
 lnk = require('./links.js');
 
-function createContentShortcuts() {
-  //Create a first block
-  var leftBlock = document.createElement('div');
-  leftBlock.id = 'osmshortcuts';
-  leftBlock.style = 'display:none;';
-
-  // Create 3 sub-blocks
-  var div_edit = document.createElement('div');
-  div_edit.id = 'edit';
-  h2_edit = document.createElement('h2');
-  h2_edit.textContent = 'Openstreetmap editing';
-  div_edit.appendChild(h2_edit);
-
-  var div_check = document.createElement('div');
-  div_check.id = 'check';
-  h2_check = document.createElement('h2');
-  h2_check.textContent = 'Openstreetmap control';
-  div_check.appendChild(h2_check);
-
-  var div_link = document.createElement('div');
-  div_link.id = 'link';
-  h2_link = document.createElement('h2');
-  h2_link.textContent = 'Link to other web maps';
-  div_link.appendChild(h2_link);
-
-  // Append them to the first block
-  leftBlock.appendChild(div_edit);
-  leftBlock.appendChild(div_check);
-  leftBlock.appendChild(div_link);
-  return leftBlock;
-}
-
-// Create div for logo
-function createToogleButton(url) {
-  var divLogo = document.createElement('div');
-  divLogo.id = 'osmbutton';
-  // Then create "a" tag
-  var aLogo = document.createElement('a');
-  aLogo.href = '#';
-  aLogo.onclick = function(e) {
+function createleftSideBar(url) {
+  var block = '<div id="osmbookmarklet">';
+  block += '<div id="osmshortcuts">';
+  block += [
+    {id: 'edit', title: 'Openstreetmap editing'},
+    {id: 'check', title: 'Openstreetmap control'},
+    {id: 'link', title: 'Link to other web maps'}
+  ].map(function(el) {
+    return '<div id="' + el.id + '">' +
+           '<h2>' + el.title + '</h2>' +
+           '</div>';
+  }).join('');
+  block += '</div>';
+  block += '<div id="osmbutton">';
+  block += '<a href="#">';
+  block += '<img src="' + url + '">';
+  block += '</a>';
+  block += '</div>';
+  block += '</div>';
+  var div = document.createElement('div');
+  div.innerHTML = block;
+  div.querySelector('#osmbutton a').onclick = function(e) {
     var osmshortcuts = document.getElementById('osmshortcuts');
     if (osmshortcuts.style.display == 'none') {
       osmshortcuts.style.display = 'initial';
@@ -51,14 +32,10 @@ function createToogleButton(url) {
       osmshortcuts.style.display = 'None';
     }
   };
-  // Create img and set src
-  var imgLogo = document.createElement('img');
-  imgLogo.src = url;
-  // Append img to a, a to div and add the div to the body
-  aLogo.appendChild(imgLogo);
-  divLogo.appendChild(aLogo);
-  return divLogo;
+  return div.firstChild;
 }
+
+// Create div for logo
 
 function appendList(parentDom, subtree) {
   subtree.forEach(function(el) {
